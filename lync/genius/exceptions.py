@@ -1,2 +1,0 @@
-class LyricsFetchError(Exception):
-    pass

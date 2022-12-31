@@ -3,35 +3,36 @@ import requests
 import json
 from ast import literal_eval
 from typing import Optional, Union
-from .data_types import SongResult, Lyrics, Section, Line
-from .exceptions import LyricsFetchError
+from .models import Lyrics, Section, Line
+from ..models import SongSearchResult
+from .exceptions import GeniusLyricsFetchError
 
 
-def fetch_lyrics(song: SongResult, session: requests.Session) -> Lyrics:
+def fetch_lyrics(song: SongSearchResult, session: requests.Session) -> Lyrics:
     """
     Fetch the lyrics corresponding to the given Genius search result.
     """
 
-    url = song.lyrics_url
+    url = song.link
 
     response = session.get(url)
 
     # validate status and response type of request
 
     if not response.ok:
-        LyricsFetchError(f"HTTP request failed; {response.status_code}")
+        GeniusLyricsFetchError(f"HTTP request failed; {response.status_code}")
 
     response_type = response.headers.get("content-type")
 
     if not response_type or "text/html" not in response_type:
-        raise LyricsFetchError("Invalid response type; expected HTML")
+        raise GeniusLyricsFetchError("Invalid response type; expected HTML")
 
     # extract, parse, and transform data
 
     lyrics_data = extract_lyrics_data(response.text)
 
     if not lyrics_data:
-        raise LyricsFetchError("Embedded lyric data not found")
+        raise GeniusLyricsFetchError("Embedded lyric data not found")
 
     return reformat_lyrics_data(lyrics_data)
 
@@ -64,7 +65,7 @@ def reformat_lyrics_data(lyrics_data: dict) -> Lyrics:
     """
 
     if not isinstance(lyrics_data, dict):
-        raise LyricsFetchError()
+        raise GeniusLyricsFetchError()
 
     children = lyrics_data["songPage"]["lyricsData"]["body"]["children"][0]
     sections: list[Section] = []

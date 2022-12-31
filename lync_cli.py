@@ -1,12 +1,20 @@
-from lync.genius import Genius, CACHE_FOREVER
+from lync.external.api import CACHE_FOREVER
 
-g = Genius(CACHE_FOREVER)
-result = g.search("sza - low")
+# from lync.genius import Genius
 
-assert result is not None
 
-print(f"Lyrics for {result.title} by {result.artist_name} ({result.release_year}):")
-print()
+# g = Genius(CACHE_FOREVER)
+# result = g.search("sza - low")
 
-for line in g.get_lyrics(result).lines:
-    print(line.text_adlibs_removed())
+# assert result is not None
+
+# print(f"Lyrics for {result.title} by {result.artist_name} ({result.release_year}):")
+# print()
+
+# for line in g.get_lyrics(result).lines:
+#     print(line.text_adlibs_removed())
+
+from lync.external.soundcloud import Soundcloud
+
+soundcloud = Soundcloud(CACHE_FOREVER)
+print(soundcloud.search("sza - low"))

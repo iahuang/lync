@@ -2,13 +2,6 @@ from dataclasses import dataclass
 import re
 
 @dataclass(frozen=True)
-class SongResult:
-    title: str
-    artist_name: str
-    lyrics_url: str
-    release_year: int
-
-@dataclass(frozen=True)
 class Section:
     section_text: str
     section_index: int
