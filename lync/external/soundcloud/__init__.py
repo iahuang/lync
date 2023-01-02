@@ -156,15 +156,9 @@ class Soundcloud:
         audio_files = self._download_playlist(transcoding, "./.tmp")
         audio_segments: list[AudioSegment] = [AudioSegment.from_file(f) for f in audio_files]
 
-        combined = audio_segments[0]
+        combined = AudioSegment.empty()
 
-        # HACK: don't worry about how this works
-
-        for i in range(1, len(audio_segments)):
-            audio_segment = audio_segments[i]
-            combined += audio_segment - 100000
-            combined = combined.overlay(
-                audio_segment, position=len(combined) - len(audio_segment) - 40
-            )
+        for audio_segment in audio_segments:
+            combined += audio_segment
 
         combined.export(output, format="mp3")
