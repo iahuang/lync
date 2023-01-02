@@ -5,7 +5,6 @@ from typing import Any, TypeVar, Generic, Optional
 from dataclasses import dataclass
 from enum import Enum
 
-CACHE_FOREVER = math.inf
 
 def url_join(base: str, *components: str) -> str:
     """

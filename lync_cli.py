@@ -1,5 +1,3 @@
-from lync.external.api import CACHE_FOREVER
-
 # from lync.genius import Genius
 
 
@@ -16,5 +14,10 @@ from lync.external.api import CACHE_FOREVER
 
 from lync.external.soundcloud import Soundcloud
 
-soundcloud = Soundcloud(CACHE_FOREVER)
-print(soundcloud.search("sza - low"))
+soundcloud = Soundcloud()
+result = soundcloud.search("the weeknd - starboy")
+assert result is not None
+
+transcoding = result.get_transcoding("audio/mpeg")
+assert transcoding is not None
+print(soundcloud.download_audio(transcoding, "out.mp3"))

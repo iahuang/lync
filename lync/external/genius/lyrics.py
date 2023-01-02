@@ -3,19 +3,16 @@ import requests
 import json
 from ast import literal_eval
 from typing import Optional, Union
-from .models import Lyrics, Section, Line
-from ..models import SongSearchResult
+from .models import Lyrics, Section, Line, GeniusSearchResult
 from .exceptions import GeniusLyricsFetchError
 
 
-def fetch_lyrics(song: SongSearchResult, session: requests.Session) -> Lyrics:
+def fetch_lyrics(song: GeniusSearchResult, session: requests.Session) -> Lyrics:
     """
     Fetch the lyrics corresponding to the given Genius search result.
     """
 
-    url = song.link
-
-    response = session.get(url)
+    response = session.get(song.lyrics_url)
 
     # validate status and response type of request
 

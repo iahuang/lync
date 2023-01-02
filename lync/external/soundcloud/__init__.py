@@ -1,14 +1,23 @@
 from typing import Optional
+from os import urandom, mkdir, remove
+from os.path import join, exists
 import requests
-import math
-from requests_cache import CachedSession
-from requests_cache.backends.filesystem import FileCache
+from pydub import AudioSegment
 from .client_id import obtain_client_id
-from .exceptions import SoundcloudSearchException
+from .exceptions import SoundcloudSearchException, SoundcloudAudioDLException
 from ..api import APIInterface, APIResponse, APIErrorData, APIErrorCode
-from ..models import SongSearchResult
+from .models import SoundCloudSearchResult, MediaTranscoding, Audio
 
 SOUNDCLOUD_API_ROOT = "https://api-v2.soundcloud.com"
+UA = "ozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17"
+
+
+def random_id() -> int:
+    """
+    Return a cyptographically secure uint32 value.
+    """
+
+    return int.from_bytes(urandom(4), byteorder="big", signed=False)
 
 
 class SoundcloudInterface(APIInterface):
@@ -23,6 +32,12 @@ class SoundcloudInterface(APIInterface):
                 APIErrorData(APIErrorCode.MalformedResponse, request_response.content)
             )
 
+    def _build_headers(self) -> dict[str, str]:
+        headers = super()._build_headers()
+        headers["User-Agent"] = UA
+
+        return headers
+
 
 class Soundcloud:
     """
@@ -33,24 +48,8 @@ class Soundcloud:
     _session: requests.Session
     _client_id: str
 
-    def __init__(self, cache_age_seconds: float) -> None:
-        """
-        If `cache_age_seconds` is `0` or a negative number, caching is disabled. If set to
-        `CACHE_FOREVER`, then the cache will never expire.
-        """
-
-        if cache_age_seconds:
-            # for `CachedSession`, an expiry of -1 indicates "forever".
-            if math.isinf(cache_age_seconds):
-                cache_age_seconds = -1
-
-            self._session = CachedSession(
-                "api_cache",
-                backend=FileCache(cache_name="./.cache"),
-                expire_after=cache_age_seconds,
-            )
-        else:
-            self._session = requests.Session()
+    def __init__(self) -> None:
+        self._session = requests.Session()
 
         self._api = SoundcloudInterface(SOUNDCLOUD_API_ROOT, self._session)
         self._client_id = obtain_client_id(self._session)
@@ -64,13 +63,14 @@ class Soundcloud:
         if not response.ok():
             raise SoundcloudSearchException(f"API call failed; error: " + response.get_error().data)
 
-    def search(self, query: str) -> Optional[SongSearchResult]:
+    def search(self, query: str) -> Optional[SoundCloudSearchResult]:
         response = self._api.get(
             "/search", {"q": query, "facet": "model", "client_id": self._client_id}
         )
         self._assert_ok(response)
+        data = response.get_data()
 
-        results: list = response.get_data()["collection"]
+        results: list = data["collection"]
         # filter non-tracks
         results = [item for item in results if item["kind"] == "track"]
 
@@ -80,15 +80,91 @@ class Soundcloud:
         # get top result
         result = results[0]
 
-        # get stream URL as rearch result link
-        stream_transcodings = result["media"]["transcodings"]
-
-        if not stream_transcodings:
+        media_transcoding_objects = result["media"]["transcodings"]
+        if not media_transcoding_objects:
             return None
 
-        return SongSearchResult(
+        media_transcodings = [
+            MediaTranscoding(
+                url=transcoding["url"],
+                preset=transcoding["preset"],
+                duration=transcoding["duration"],
+                protocol=transcoding["format"]["protocol"],
+                mime=transcoding["format"]["mime_type"],
+            )
+            for transcoding in media_transcoding_objects
+        ]
+
+        return SoundCloudSearchResult(
             title=result["title"],
             artist_name=result["publisher_metadata"]["artist"],
-            link=stream_transcodings[0]["url"],
             song_image_url=result["artwork_url"],
+            stream_transcodings=media_transcodings,
         )
+
+    def _fetch_playlist_entries(self, transcoding: MediaTranscoding) -> list[str]:
+        """
+        Return a list of audio URLs representing the playlist file at the URL in the provided
+        transcoding.
+        """
+
+        response = self._session.get(
+            transcoding.url, params={"client_id": self._client_id, "User-Agent": UA}
+        )
+        if not response.ok:
+            raise SoundcloudAudioDLException(
+                "Transcoding request failed: " + str(response.status_code)
+            )
+        media_url = response.json()["url"]
+
+        # download and parse m3u8 playlist file
+        playlist_data = self._session.get(media_url).text
+        lines = playlist_data.split("\n")
+        return [line for line in lines if line.startswith("http")]  # return lines resembling URLs
+
+    def _download_playlist(self, transcoding: MediaTranscoding, output_dir: str) -> list[str]:
+        """
+        Download audio files in the playlist provided by `transcoding`, returning corresponding
+        file paths to downloaded audio files in the same order as the playlist.
+        """
+
+        output_filenames: list[str] = []
+
+        if not exists(output_dir):
+            mkdir(output_dir)
+
+        for url in self._fetch_playlist_entries(transcoding):
+            response = self._session.get(url)
+
+            if not response.ok:
+                raise SoundcloudAudioDLException(f"Failed to download audio file at {url}")
+
+            identifier = random_id()
+            filename = join(output_dir, str(identifier) + ".audio")  # use generic file extension
+            output_filenames.append(filename)
+
+            with open(filename, "wb") as fl:
+                fl.write(response.content)
+
+        return output_filenames
+
+    def download_audio(self, transcoding: MediaTranscoding, output: str) -> None:
+        """
+        Download audio for a transcoding, writing an output audio file `output`.
+        """
+
+        audio_files = self._download_playlist(transcoding, "./.tmp")
+        audio_segments: list[AudioSegment] = [AudioSegment.from_file(f) for f in audio_files]
+
+        combined = audio_segments[0]
+
+        # HACK: don't worry about how this works
+
+        for i in range(1, len(audio_segments)):
+            audio_segment = audio_segments[i]
+            combined += audio_segment - 100000
+            combined = combined.overlay(
+                audio_segment, position=len(combined) - len(audio_segment) - 40
+            )
+
+        combined.export(output, format="mp3")

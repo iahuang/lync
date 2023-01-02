@@ -7,3 +7,5 @@ class SoundcloudClientIDException(SoundcloudException):
 class SoundcloudSearchException(SoundcloudException):
     pass
 
+class SoundcloudAudioDLException(SoundcloudException):
+    pass

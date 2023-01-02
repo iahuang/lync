@@ -1,6 +1,13 @@
 from dataclasses import dataclass
 import re
 
+@dataclass
+class GeniusSearchResult:
+    title: str
+    artist_name: str
+    lyrics_url: str
+    song_image_url: str
+
 @dataclass(frozen=True)
 class Section:
     section_text: str

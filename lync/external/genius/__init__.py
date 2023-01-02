@@ -4,12 +4,12 @@ import math
 from requests_cache import CachedSession
 from requests_cache.backends.filesystem import FileCache
 from ..api import APIInterface, APIResponse, APIErrorData, APIErrorCode
-from .models import Lyrics, Section, Line
-from ..models import SongSearchResult
+from .models import Lyrics, GeniusSearchResult
 from .lyrics import fetch_lyrics
 from .exceptions import GeniusAPIError
 
 GENIUS_API_ROOT = "https://genius.com/api"
+ACHE_FOREVER = math.inf
 
 class GeniusInterface(APIInterface):
     def _build_response(self, request_response: requests.Response) -> APIResponse:
@@ -111,7 +111,7 @@ class Genius:
         if not response.ok():
             raise GeniusAPIError(f"API call failed; error: " + response.get_error().data)
 
-    def search(self, query: str) -> Optional[SongSearchResult]:
+    def search(self, query: str) -> Optional[GeniusSearchResult]:
         """
         Search Genius for the song provided by `query`. Return the result with most page views.
 
@@ -138,14 +138,14 @@ class Genius:
         get_pageviews = lambda hit: hit["result"]["stats"].get("pageviews", 0)
         song_result = max(hits, key=get_pageviews)["result"]
 
-        return SongSearchResult(
+        return GeniusSearchResult(
             title=song_result["title"],
             artist_name=song_result["artist_names"],
-            link=song_result["url"],
+            lyrics_url=song_result["url"],
             song_image_url=song_result["song_art_image_url"]
         )
 
-    def get_lyrics(self, song: SongSearchResult) -> Lyrics:
+    def get_lyrics(self, song: GeniusSearchResult) -> Lyrics:
         """
         Extract the lyric data from the page referenced by the provided search result `song`.
         """
