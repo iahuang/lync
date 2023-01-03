@@ -113,7 +113,7 @@ class Soundcloud:
         )
         if not response.ok:
             raise SoundcloudAudioDLException(
-                "Transcoding request failed: " + str(response.status_code)
+                "Transcoding request failed: " + str(response.status_code) + ": " + str(response.content)
             )
         media_url = response.json()["url"]
 
