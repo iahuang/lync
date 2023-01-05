@@ -2,10 +2,10 @@ import sys
 import json
 import moviepy.editor as mp
 
-TARGET_SONG = "Lil Keed - Snake"
+TARGET_SONG = "Nicki Minaj - Anaconda"
 
 IMG_PATH = "./cli-test/"+ TARGET_SONG+".jpg"
-TRANSCRIPT_PATH = "./cli-test/"+TARGET_SONG+"-transcript.json"
+TRANSCRIPT_PATH = = "./cli-test/"+TARGET_SONG+"-transcript.json"
 AUDIO_PATH = "./cli-test/"+TARGET_SONG+".mp3"
 
 audio_clip = mp.AudioFileClip(AUDIO_PATH)
@@ -16,8 +16,6 @@ video_clip = image_clip.set_audio(audio_clip)
 # specify the duration of the new clip to be the duration of the audio clip
 video_clip.duration = audio_clip.duration
 w,h = moviesize = video_clip.size
-# set the FPS to 1
-#video_clip.fps = 1
 
 transcript_file = open(TRANSCRIPT_PATH, "r")
 transcript = json.load(transcript_file)
@@ -26,26 +24,22 @@ for segment in transcript['fragments']:
     text = segment['lines'][0]
     #break up long lines so they fit on the screen
     if len(text.split(" "))>6:
-        print("splitting:", text)
-        #text = text.split(" ")
+        text = text.split(" ")
         text.insert(6, "\n")
         text = " ".join(text)
-        #print("into: ", text)
-    
+        
     start = float(segment['begin'])
     end = float(segment['end'])
     txt_duration = end-start
     
     txt_clip = mp.TextClip(text, font = "Arial", color = "yellow", stroke_color='black', stroke_width=2, fontsize=60, align='center')
-    txt_clip = txt_clip.set_start(max(0,start-2))# anticipate by 2 seconds
-    #txt_col = txt_clip.on_color(size=(video_clip.w + txt_clip.w, txt_clip.h+5), color=(0,0,0), pos=(6,"center"), col_opacity=0.6)
+    txt_clip = txt_clip.set_start(start)# anticipate by 2 seconds
     txt_clip = txt_clip.set_pos( lambda t: (max(w/30,int(w-0.5*w*t)),max(5*h/6,int(100*t)))).set_duration(txt_duration)
     
     txt_clips.append(txt_clip)
-    
+
 print("Finished pre-rendered text clips")
-for clip in txt_clips:
-    print("Generated text clip for line:", clip.txt+";","start:", clip.start, "end:", clip.end)
+
 final_video = mp.CompositeVideoClip([video_clip]+[clip for clip in txt_clips])
 final_video.set_duration(audio_clip.duration)
 final_video.write_videofile(TARGET_SONG+"-karaoke.mp4",fps=24)

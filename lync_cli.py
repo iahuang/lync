@@ -60,6 +60,6 @@ ExecuteTaskCLI(use_sys=False).run(arguments=[
     test_audio_path,
     test_transcript_path,
     u"task_language=eng|is_text_type=plain|os_task_file_format=json",
-    os.path.realpath(OUTDIR+SONG_TARGET+"-transcript.vtt")
+    os.path.realpath(OUTDIR+SONG_TARGET+"-transcript.json")
     ])
 print("Processing complete")
