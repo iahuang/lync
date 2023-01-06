@@ -2,10 +2,10 @@ import sys
 import json
 import moviepy.editor as mp
 
-TARGET_SONG = "Nicki Minaj - Anaconda"
+TARGET_SONG = "Jimi Hendrix - All Along the Watchtower"
 
 IMG_PATH = "./cli-test/"+ TARGET_SONG+".jpg"
-TRANSCRIPT_PATH = = "./cli-test/"+TARGET_SONG+"-transcript.json"
+TRANSCRIPT_PATH = "ctc_seg_alignment_aatw.json"#"./cli-test/"+TARGET_SONG+"-transcript.json"
 AUDIO_PATH = "./cli-test/"+TARGET_SONG+".mp3"
 
 audio_clip = mp.AudioFileClip(AUDIO_PATH)
