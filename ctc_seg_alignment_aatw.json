@@ -1,1 +1,304 @@
-{"fragments": [{"lines": ["THERE MUST BE SOME KIND OF WAY OUT OF HERE"], "begin": 10.02404758259145, "end": 19.5057778470445, "language": "eng", "children": [], "id": 0}, {"lines": ["SAID THE JOKER TO THE THIEF"], "begin": 19.5057778470445, "end": 21.320268809560268, "language": "eng", "children": [], "id": 1}, {"lines": ["THERES TOO MUCH CONFUSION"], "begin": 21.320268809560268, "end": 36.03216153363811, "language": "eng", "children": [], "id": 2}, {"lines": ["I CANT GET NO RELIEF"], "begin": 36.03216153363811, "end": 44.54575312976209, "language": "eng", "children": [], "id": 3}, {"lines": ["BUSINESSMEN THEY DRINK MY WINE"], "begin": 44.54575312976209, "end": 48.63924474119766, "language": "eng", "children": [], "id": 4}, {"lines": ["PLOWMEN DIG MY EARTH"], "begin": 48.63924474119766, "end": 60.745528443102856, "language": "eng", "children": [], "id": 5}, {"lines": ["NONE WILL LEVEL ON THE LINE"], "begin": 60.745528443102856, "end": 69.76717750873125, "language": "eng", "children": [], "id": 6}, {"lines": ["NOBODY OFFERED HIS WORD"], "begin": 69.76717750873125, "end": 71.16796453179343, "language": "eng", "children": [], "id": 7}, {"lines": ["HEY"], "begin": 71.16796453179343, "end": 71.50183086889633, "language": "eng", "children": [], "id": 8}, {"lines": ["NO REASON TO GET EXCITED"], "begin": 71.50183086889633, "end": 85.17583476241515, "language": "eng", "children": [], "id": 9}, {"lines": ["THE THIEF HE KINDLY SPOKE"], "begin": 85.17583476241515, "end": 93.98700287639171, "language": "eng", "children": [], "id": 10}, {"lines": ["THERE ARE MANY HERE AMONG US"], "begin": 93.98700287639171, "end": 95.43133768255427, "language": "eng", "children": [], "id": 11}, {"lines": ["WHO FEEL THAT LIFE IS BUT A JOKE"], "begin": 95.43133768255427, "end": 110.82547900853804, "language": "eng", "children": [], "id": 12}, {"lines": ["BUT UH BUT YOU AND I WEVE BEEN THROUGH THAT"], "begin": 110.82547900853804, "end": 120.45679703757173, "language": "eng", "children": [], "id": 13}, {"lines": ["AND THIS IS NOT OUR FATE"], "begin": 120.45679703757173, "end": 124.07126303490314, "language": "eng", "children": [], "id": 14}, {"lines": ["SO LET US STOP TALKIN FALSELY NOW"], "begin": 124.07126303490314, "end": 143.64599153852325, "language": "eng", "children": [], "id": 15}, {"lines": ["THE HOURS GETTING LATE"], "begin": 143.64599153852325, "end": 145.22096969398692, "language": "eng", "children": [], "id": 16}, {"lines": ["HEY"], "begin": 145.22096969398692, "end": 145.56935195878995, "language": "eng", "children": [], "id": 17}, {"lines": ["HEY"], "begin": 145.56935195878995, "end": 146.08466739214444, "language": "eng", "children": [], "id": 18}, {"lines": ["ALL ALONG THE WATCHTOWER"], "begin": 146.08466739214444, "end": 160.58607916457044, "language": "eng", "children": [], "id": 19}, {"lines": ["PRINCES KEPT THE VIEW"], "begin": 166.88316231015452, "end": 168.99805926679355, "language": "eng", "children": [], "id": 20}, {"lines": ["WHILE ALL THE WOMEN CAME AND WENT"], "begin": 168.99805926679355, "end": 173.425417215332, "language": "eng", "children": [], "id": 21}, {"lines": ["BAREFOOT SERVANTS TOO"], "begin": 173.425417215332, "end": 185.00912752003268, "language": "eng", "children": [], "id": 22}, {"lines": ["WELL UH OUTSIDE IN THE COLD DISTANCE"], "begin": 185.00912752003268, "end": 195.00334374156952, "language": "eng", "children": [], "id": 23}, {"lines": ["A WILDCAT DID GROWL"], "begin": 195.00334374156952, "end": 209.33782234544407, "language": "eng", "children": [], "id": 24}, {"lines": ["TWO RIDERS WERE APPROACHING"], "begin": 209.33782234544407, "end": 218.14173249557058, "language": "eng", "children": [], "id": 25}, {"lines": ["AND THE WIND BEGAN TO HOWL"], "begin": 218.14173249557058, "end": 220.05783495198725, "language": "eng", "children": [], "id": 26}, {"lines": ["HEY"], "begin": 220.05783495198725, "end": 222.26425596240642, "language": "eng", "children": [], "id": 27}, {"lines": ["ALL ALONG THE WATCHTOWER"], "begin": 222.26425596240642, "end": 241.94785392377744, "language": "eng", "children": [], "id": 28}, {"lines": ["ALL ALONG THE WATCHTOWER"], "begin": 241.94785392377744, "end": 248.06631744938062, "language": "eng", "children": [], "id": 29}]}
+{
+    "fragments": [
+        {
+            "lines": [
+                "THERE MUST BE SOME KIND OF WAY OUT OF HERE"
+            ],
+            "begin": 10.02404758259145,
+            "end": 21.42188030346115,
+            "language": "eng",
+            "children": [],
+            "id": 0
+        },
+        {
+            "lines": [
+                "SAID THE JOKER TO THE THIEF"
+            ],
+            "begin": 21.42188030346115,
+            "end": 28.629038406573777,
+            "language": "eng",
+            "children": [],
+            "id": 1
+        },
+        {
+            "lines": [
+                "THERES TOO MUCH CONFUSION"
+            ],
+            "begin": 28.629038406573777,
+            "end": 32.453985355557016,
+            "language": "eng",
+            "children": [],
+            "id": 2
+        },
+        {
+            "lines": [
+                "I CANT GET NO RELIEF"
+            ],
+            "begin": 32.453985355557016,
+            "end": 37.00472868954656,
+            "language": "eng",
+            "children": [],
+            "id": 3
+        },
+        {
+            "lines": [
+                "BUSINESSMEN THEY DRINK MY WINE"
+            ],
+            "begin": 37.00472868954656,
+            "end": 45.92476626127407,
+            "language": "eng",
+            "children": [],
+            "id": 4
+        },
+        {
+            "lines": [
+                "PLOWMEN DIG MY EARTH"
+            ],
+            "begin": 45.92476626127407,
+            "end": 61.369713334208285,
+            "language": "eng",
+            "children": [],
+            "id": 5
+        },
+        {
+            "lines": [
+                "NONE WILL LEVEL ON THE LINE"
+            ],
+            "begin": 61.369713334208285,
+            "end": 74.91307387842598,
+            "language": "eng",
+            "children": [],
+            "id": 6
+        },
+        {
+            "lines": [
+                "NOBODY OFFERED HIS WORD"
+            ],
+            "begin": 74.91307387842598,
+            "end": 80.02268042887037,
+            "language": "eng",
+            "children": [],
+            "id": 7
+        },
+        {
+            "lines": [
+                "HEY"
+            ],
+            "begin": 80.02268042887037,
+            "end": 80.32751491057303,
+            "language": "eng",
+            "children": [],
+            "id": 8
+        },
+        {
+            "lines": [
+                "NO REASON TO GET EXCITED"
+            ],
+            "begin": 80.32751491057303,
+            "end": 84.00004461870493,
+            "language": "eng",
+            "children": [],
+            "id": 9
+        },
+        {
+            "lines": [
+                "THE THIEF HE KINDLY SPOKE"
+            ],
+            "begin": 84.00004461870493,
+            "end": 87.74515396533748,
+            "language": "eng",
+            "children": [],
+            "id": 10
+        },
+        {
+            "lines": [
+                "THERE ARE MANY HERE AMONG US"
+            ],
+            "begin": 87.74515396533748,
+            "end": 91.54832702277052,
+            "language": "eng",
+            "children": [],
+            "id": 11
+        },
+        {
+            "lines": [
+                "WHO FEEL THAT LIFE IS BUT A JOKE"
+            ],
+            "begin": 91.54832702277052,
+            "end": 97.32566624742073,
+            "language": "eng",
+            "children": [],
+            "id": 12
+        },
+        {
+            "lines": [
+                "BUT UH BUT YOU AND I WEVE BEEN THROUGH THAT"
+            ],
+            "begin": 97.32566624742073,
+            "end": 119.06326797835962,
+            "language": "eng",
+            "children": [],
+            "id": 13
+        },
+        {
+            "lines": [
+                "AND THIS IS NOT OUR FATE"
+            ],
+            "begin": 119.06326797835962,
+            "end": 129.15909569379735,
+            "language": "eng",
+            "children": [],
+            "id": 14
+        },
+        {
+            "lines": [
+                "SO LET US STOP TALKIN FALSELY NOW"
+            ],
+            "begin": 129.15909569379735,
+            "end": 141.96940188915866,
+            "language": "eng",
+            "children": [],
+            "id": 15
+        },
+        {
+            "lines": [
+                "THE HOURS GETTING LATE"
+            ],
+            "begin": 141.96940188915866,
+            "end": 170.28997683210477,
+            "language": "eng",
+            "children": [],
+            "id": 16
+        },
+        {
+            "lines": [
+                "HEY"
+            ],
+            "begin": 170.28997683210477,
+            "end": 171.19722231336266,
+            "language": "eng",
+            "children": [],
+            "id": 17
+        },
+        {
+            "lines": [
+                "HEY"
+            ],
+            "begin": 171.19722231336266,
+            "end": 171.58915236126606,
+            "language": "eng",
+            "children": [],
+            "id": 18
+        },
+        {
+            "lines": [
+                "ALL ALONG THE WATCHTOWER"
+            ],
+            "begin": 171.58915236126606,
+            "end": 174.91329980459494,
+            "language": "eng",
+            "children": [],
+            "id": 19
+        },
+        {
+            "lines": [
+                "PRINCES KEPT THE VIEW"
+            ],
+            "begin": 174.91329980459494,
+            "end": 179.25356218693267,
+            "language": "eng",
+            "children": [],
+            "id": 20
+        },
+        {
+            "lines": [
+                "WHILE ALL THE WOMEN CAME AND WENT"
+            ],
+            "begin": 179.25356218693267,
+            "end": 184.39945855662737,
+            "language": "eng",
+            "children": [],
+            "id": 21
+        },
+        {
+            "lines": [
+                "BAREFOOT SERVANTS TOO"
+            ],
+            "begin": 184.39945855662737,
+            "end": 189.1534248784187,
+            "language": "eng",
+            "children": [],
+            "id": 22
+        },
+        {
+            "lines": [
+                "WELL UH OUTSIDE IN THE COLD DISTANCE"
+            ],
+            "begin": 189.1534248784187,
+            "end": 196.66541746323395,
+            "language": "eng",
+            "children": [],
+            "id": 23
+        },
+        {
+            "lines": [
+                "A WILDCAT DID GROWL"
+            ],
+            "begin": 196.66541746323395,
+            "end": 199.8226317380114,
+            "language": "eng",
+            "children": [],
+            "id": 24
+        },
+        {
+            "lines": [
+                "TWO RIDERS WERE APPROACHING"
+            ],
+            "begin": 199.8226317380114,
+            "end": 210.56441823610473,
+            "language": "eng",
+            "children": [],
+            "id": 25
+        },
+        {
+            "lines": [
+                "AND THE WIND BEGAN TO HOWL"
+            ],
+            "begin": 210.56441823610473,
+            "end": 218.46834086882342,
+            "language": "eng",
+            "children": [],
+            "id": 26
+        },
+        {
+            "lines": [
+                "HEY"
+            ],
+            "begin": 218.46834086882342,
+            "end": 218.69333774817537,
+            "language": "eng",
+            "children": [],
+            "id": 27
+        },
+        {
+            "lines": [
+                "ALL ALONG THE WATCHTOWER"
+            ],
+            "begin": 218.69333774817537,
+            "end": 235.40842849487063,
+            "language": "eng",
+            "children": [],
+            "id": 28
+        },
+        {
+            "lines": [
+                "ALL ALONG THE WATCHTOWER"
+            ],
+            "begin": 235.40842849487063,
+            "end": 237.01243850573456,
+            "language": "eng",
+            "children": [],
+            "id": 29
+        }
+    ]
+}

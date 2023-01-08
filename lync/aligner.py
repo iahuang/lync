@@ -133,7 +133,7 @@ class TranscriptLine:
     def duration(self):
         return self.end_time_s - self.start_time_s
 
-def merge_lines(word_segs, lyric_lines, waveform_len = w_len, srate = 44100):
+def merge_lines(word_segs, lyric_lines, waveform_len, srate = 44100):
     num_frames = word_segs[-1].end
 
     line_segments = []
@@ -209,7 +209,7 @@ def align(vocal_path, lyrics_path, outfile_path):
 
     segments = merge_repeats(path)
     word_segments = merge_words(segments)
-    merged_lines = merge_lines(word_segments, transcript_lines)
+    merged_lines = merge_lines(word_segments, transcript_lines, waveform.shape[1])
 
     with open(outfile_path, 'w') as f:
         export_transcript(merged_lines, f)

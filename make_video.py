@@ -2,10 +2,10 @@ import sys
 import json
 import moviepy.editor as mp
 
-TARGET_SONG = "Jimi Hendrix - All Along the Watchtower"
+TARGET_SONG = "Lil Keed - Snake"
 
 IMG_PATH = "./cli-test/"+ TARGET_SONG+".jpg"
-TRANSCRIPT_PATH = "ctc_seg_alignment_aatw.json"#"./cli-test/"+TARGET_SONG+"-transcript.json"
+TRANSCRIPT_PATH = "./cli-test/"+TARGET_SONG+"-transcript.json"
 AUDIO_PATH = "./cli-test/"+TARGET_SONG+".mp3"
 
 audio_clip = mp.AudioFileClip(AUDIO_PATH)
@@ -32,7 +32,7 @@ for segment in transcript['fragments']:
     end = float(segment['end'])
     txt_duration = end-start
     
-    txt_clip = mp.TextClip(text, font = "Arial", color = "yellow", stroke_color='black', stroke_width=2, fontsize=60, align='center')
+    txt_clip = mp.TextClip(text, font = "Arial", color = "yellow", stroke_color='black', stroke_width=2, fontsize=40, align='center')
     txt_clip = txt_clip.set_start(start)# anticipate by 2 seconds
     txt_clip = txt_clip.set_pos( lambda t: (max(w/30,int(w-0.5*w*t)),max(5*h/6,int(100*t)))).set_duration(txt_duration)
     
